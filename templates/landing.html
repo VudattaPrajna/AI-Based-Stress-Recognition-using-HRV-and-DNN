@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+  </head>
+  <body class="authbg">
+    <div class="landing">
+      <span class="landing__kicker">HRV &middot; DNN &middot; Stress Recognition</span>
+      <h1 class="landing__title">AI Based Stress Recognition Using HRV and DNN</h1>
+      <p class="landing__subtitle">
+        Advanced AI-powered stress monitoring at your fingertips — analyze heart-rate
+        variability with a deep neural network and get an instant stress reading.
+      </p>
+      <div class="landing__actions">
+        <a class="landing__btn landing__btn--primary" href="{{ url_for('register_page') }}">Get Started</a>
+        <a class="landing__btn landing__btn--ghost" id="exitBtn" href="#">Exit</a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('exitBtn').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.close();
+        // Most browsers block closing a tab that wasn't opened by script.
+        setTimeout(function () {
+          alert('You can close this tab to exit.');
+        }, 200);
+      });
+    </script>
+  </body>
+</html>

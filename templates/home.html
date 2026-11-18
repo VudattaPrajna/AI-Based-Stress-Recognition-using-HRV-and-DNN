@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="hero">
+    <div class="heartbeat heartbeat--center" aria-hidden="true">
+      <svg class="heartbeat__svg" viewBox="0 0 900 220" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="ecgGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(0,229,255,.95)"/>
+            <stop offset="45%" stop-color="rgba(124,92,255,.95)"/>
+            <stop offset="100%" stop-color="rgba(0,229,255,.90)"/>
+          </linearGradient>
+          <filter id="ecgGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3.5" result="blur"/>
+            <feColorMatrix in="blur" type="matrix"
+              values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 16 -6" result="glow"/>
+            <feMerge>
+              <feMergeNode in="glow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path class="heartbeat__grid" d="M0 110 H900" />
+
+        <path class="heartbeat__trail"
+              d="M0 110 L120 110 L160 110 L180 60 L200 160 L230 110 L310 110 L330 85 L350 110 L420 110 L450 110 L470 52 L490 168 L520 110 L600 110 L640 110 L660 78 L680 110 L760 110 L900 110" />
+        <path class="heartbeat__line"
+              d="M0 110 L120 110 L160 110 L180 60 L200 160 L230 110 L310 110 L330 85 L350 110 L420 110 L450 110 L470 52 L490 168 L520 110 L600 110 L640 110 L660 78 L680 110 L760 110 L900 110" />
+      </svg>
+    </div>
+
+    <div class="hero__left">
+      <div class="kicker">HRV based Stress Detection Using ANN  </div>
+      <h1 class="title">
+        Detect stress states from <span class="shine">heart-rate variability</span> features.
+      </h1>
+      <p class="subtitle">
+        This web app runs your trained ANN locally and predicts one of three study-relevant conditions:
+        <strong>Medium level stress</strong>, <strong>Low stress</strong>, or <strong>High stress</strong>.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="{{ url_for('predict_page') }}">
+          Start Prediction
+          <span class="btn__glow" aria-hidden="true"></span>
+        </a>
+        <a class="btn btn--ghost" href="{{ url_for('about') }}">Project Overview</a>
+      </div>
+
+      <div class="chips">
+        <span class="chip">Time-domain HRV (e.g., RMSSD, SDRR)</span>
+        <span class="chip">Frequency-domain HRV (LF/HF, TP)</span>
+        <span class="chip">ANN classifier (Keras)</span>
+        <span class="chip">StandardScaler</span>
+      </div>
+    </div>
+
+    <div class="hero__right">
+      <div class="glass panel hero__note">
+        <h2 class="h2">Fast start</h2>
+        <p class="muted">
+          Head to <strong>Prediction</strong>, fill feature values (or generate random values), and get an instant class output.
+        </p>
+        <div class="badges">
+          <span class="badge b--mid">Medium level stress</span>
+          <span class="badge b--good">Low stress</span>
+          <span class="badge b--high">High stress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="glass panel">
+      <h2 class="h2">What the model sees</h2>
+      <p class="muted">
+        The input is a vector of HRV-derived features (time + frequency domain), scaled using the same
+        <strong>StandardScaler</strong> used during training.
+      </p>
+      <ul class="list">
+        <li><strong>Time domain:</strong> MEAN_RR, MEDIAN_RR, SDRR, RMSSD, SDSD, pNN25, pNN50</li>
+        <li><strong>Frequency domain:</strong> VLF/LF/HF, TP, LF_HF, HF_LF</li>
+        <li><strong>Nonlinear:</strong> SD1, SD2, sampen, higuci (as included in your dataset)</li>
+      </ul>
+    </div>
+
+    <div class="glass panel">
+      <h2 class="h2">Why these classes matter</h2>
+      <p class="muted">
+        Your notebook uses <code>condition</code> labels mapped to:
+        <strong>Medium level stress</strong>, <strong>Low stress</strong>, and <strong>High stress</strong>.
+        These align well with study scenarios where workload and interruptions shift autonomic balance.
+      </p>
+      <div class="badges">
+        <span class="badge b--mid">Medium level stress</span>
+        <span class="badge b--good">Low stress</span>
+        <span class="badge b--high">High stress</span>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+

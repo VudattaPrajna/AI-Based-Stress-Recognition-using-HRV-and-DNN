@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="page__head">
+      <div class="kicker">Monitoring system</div>
+      <h1 class="title title--sm">Stress <span class="shine">Calendar</span></h1>
+      <p class="subtitle">Each day is colored by its most frequent stress level, built from your saved history.</p>
+    </div>
+
+    <div class="glass panel">
+      <div class="cal-head">
+        <button id="btnPrevMonth" class="btn btn--ghost" type="button">&larr; Prev</button>
+        <h2 class="h2" id="calTitle" style="margin:0">—</h2>
+        <button id="btnNextMonth" class="btn btn--ghost" type="button">Next &rarr;</button>
+      </div>
+
+      <div class="cal-grid" id="calDowRow">
+        <div class="cal-dow">Mon</div>
+        <div class="cal-dow">Tue</div>
+        <div class="cal-dow">Wed</div>
+        <div class="cal-dow">Thu</div>
+        <div class="cal-dow">Fri</div>
+        <div class="cal-dow">Sat</div>
+        <div class="cal-dow">Sun</div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div class="cal-legend">
+        <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--g)"></span> Mostly low</div>
+        <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--y)"></span> Mostly medium</div>
+        <div class="cal-legend__item"><span class="cal-legend__dot" style="background:var(--r)"></span> Mostly high</div>
+        <div class="cal-legend__item"><span class="cal-legend__dot" style="background:rgba(255,255,255,.15)"></span> No data</div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+{% endblock %}

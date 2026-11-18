@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="about-hero">
+      <div class="about-hero__left">
+        <div class="kicker">Project overview</div>
+        <h1 class="title title--sm">
+          From <span class="shine">HRV</span> features to stress-class predictions.
+        </h1>
+        <p class="subtitle">
+          This application is based on your notebook <code>Stress_heartrate_full.ipynb</code> and runs the same inference pipeline
+          used in training: scaling → ANN → class mapping.
+        </p>
+
+        <div class="about-hero__chips">
+          <span class="chip">StandardScaler</span>
+          <span class="chip">Keras ANN</span>
+          <span class="chip">3-class output</span>
+          <span class="chip">Local inference</span>
+        </div>
+      </div>
+
+      <div class="about-hero__right">
+        <div class="glass card tilt" data-tilt>
+          <div class="card__hdr">
+            <div class="dot dot--g"></div>
+            <div class="dot dot--y"></div>
+            <div class="dot dot--r"></div>
+            <div class="card__title">Live demo vibe</div>
+          </div>
+          <div class="card__body">
+            <div class="metric">
+              <div class="metric__label">Pipeline</div>
+              <div class="metric__value">HRV → Scaling → ANN → Class</div>
+            </div>
+            <div class="metric">
+              <div class="metric__label">Classes</div>
+            <div class="metric__value">Medium • Low • High stress</div>
+            </div>
+            <div class="metric">
+              <div class="metric__label">Status</div>
+              <div class="metric__value">
+                {% if status and status.ready %}
+                  <span class="ok">Ready</span>
+                {% else %}
+                  <span class="warn">Waiting for artifacts</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="divider"></div>
+            <p class="muted">
+              Tip: Use the Prediction page to auto-fill random feature values, then run inference instantly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="grid grid--3 about-grid">
+      <div class="glass panel about-card">
+        <div class="about-card__icon">01</div>
+        <h2 class="h2">Dataset & labeling</h2>
+        <p class="muted">
+          The workflow loads a stress dataset (CSV) with an integer label column <code>condition</code>, then predicts:
+          <strong>Medium level stress</strong> (0), <strong>Low stress</strong> (1), <strong>High stress</strong> (2).
+        </p>
+      </div>
+      <div class="glass panel about-card">
+        <div class="about-card__icon">02</div>
+        <h2 class="h2">Feature engineering</h2>
+        <p class="muted">
+          ID-like columns are removed (e.g., <code>uuid*</code> and <code>datasetId</code>), and the remaining HRV features are used
+          as the ANN input vector.
+        </p>
+      </div>
+      <div class="glass panel about-card">
+        <div class="about-card__icon">03</div>
+        <h2 class="h2">Model pipeline</h2>
+        <p class="muted">
+          <strong>StandardScaler</strong> → <strong>Keras ANN</strong> → <strong>argmax class</strong> → label mapping.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid grid--2 about-split">
+      <div class="glass panel">
+        <h2 class="h2">HRV signals used (examples)</h2>
+        <p class="muted">
+          Your dataset includes a wide HRV feature set spanning time-domain, frequency-domain, and nonlinear measures.
+          These are commonly used to quantify autonomic nervous system changes under mental load and pressure.
+        </p>
+        <div class="hrv-grid">
+          <div class="hrv-pill">RMSSD</div>
+          <div class="hrv-pill">SDRR</div>
+          <div class="hrv-pill">SDSD</div>
+          <div class="hrv-pill">pNN25 / pNN50</div>
+          <div class="hrv-pill">LF / HF</div>
+          <div class="hrv-pill">LF_HF</div>
+          <div class="hrv-pill">TP</div>
+          <div class="hrv-pill">SD1 / SD2</div>
+          <div class="hrv-pill">sampen</div>
+          <div class="hrv-pill">higuci</div>
+        </div>
+      </div>
+
+      <div class="glass panel artifacts">
+        <div class="row row--split">
+          <h2 class="h2">Artifacts expected by the web app</h2>
+          <a class="btn btn--ghost" href="{{ url_for('predict_page') }}">Open Prediction</a>
+        </div>
+        <p class="muted">
+          To run predictions, place these files next to <code>app.py</code> (exported from your training notebook):
+        </p>
+        <ul class="list">
+          <li><code>stress_ann_model.h5</code> — saved Keras ANN model</li>
+          <li><code>scaler.pkl</code> — fitted scaler (StandardScaler)</li>
+          <li><code>feature_columns.pkl</code> — ordered list of input feature names</li>
+        </ul>
+        <div class="divider"></div>
+        <p class="muted">
+          Current status:
+          {% if status and status.ready %}
+            <span class="ok">Ready</span>
+          {% else %}
+            <span class="warn">Not ready</span>
+          {% endif %}
+        </p>
+      </div>
+    </section>
+
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/tilt.js') }}"></script>
+{% endblock %}
+

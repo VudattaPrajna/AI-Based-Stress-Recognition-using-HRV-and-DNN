@@ -1,0 +1,188 @@
+/* Dedicated stylesheet for landing / register / login pages.
+   Kept separate from style.css so nothing in the original app theme is touched. */
+
+.authbg {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: Inter, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(900px 600px at 15% 10%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 90% 90%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 45%, #2563eb 75%, #3b82f6 100%);
+  color: #0f172a;
+}
+
+/* ---------- Landing page ---------- */
+.landing {
+  max-width: 720px;
+  text-align: center;
+  color: #ffffff;
+}
+.landing__kicker {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.10);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.landing__title {
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -.01em;
+}
+.landing__subtitle {
+  font-size: clamp(15px, 2.2vw, 19px);
+  color: rgba(255,255,255,.88);
+  margin: 0 0 34px;
+  line-height: 1.6;
+}
+.landing__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.landing__btn {
+  padding: 14px 30px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+}
+.landing__btn:hover { transform: translateY(-2px); }
+.landing__btn--primary {
+  background: #ffffff;
+  color: #1d4ed8;
+  box-shadow: 0 20px 45px rgba(0,0,0,.25);
+}
+.landing__btn--primary:hover { filter: brightness(1.03); }
+.landing__btn--ghost {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255,255,255,.55);
+}
+.landing__btn--ghost:hover { background: rgba(255,255,255,.12); }
+
+/* ---------- Register / Login cards ---------- */
+.authcard {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 38px 36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+}
+.authcard__brand {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+.authcard__title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: #16213e;
+  margin: 0 0 6px;
+}
+.authcard__subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 26px;
+}
+
+.authfield { margin-bottom: 16px; }
+.authfield label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 6px;
+}
+.authfield input,
+.authfield select {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe2ea;
+  background: #f8fafc;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.authfield input:focus,
+.authfield select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+.authfield-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.authbtn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: filter .15s ease, transform .15s ease;
+}
+.authbtn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+
+.autherror {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.authswitch {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #64748b;
+}
+.authswitch a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+.authswitch a:hover { text-decoration: underline; }
+
+.authback {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: none;
+}
+.authback:hover { color: #64748b; }

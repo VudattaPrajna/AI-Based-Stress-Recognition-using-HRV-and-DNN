@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="page__head">
+      <div class="kicker">Monitoring system</div>
+      <h1 class="title title--sm">Stress <span class="shine">History</span></h1>
+      <p class="subtitle">Every click of <strong>Predict Stress</strong> is saved here: date, time, HRV values, predicted level and suggestions.</p>
+    </div>
+
+    <div class="glass panel">
+      <div class="row row--split">
+        <h2 class="h2">Saved predictions</h2>
+        <div class="row">
+          <a class="btn btn--ghost" href="{{ url_for('report_page') }}">Generate Report</a>
+          <button id="btnRefresh" class="btn btn--primary" type="button">Refresh</button>
+        </div>
+      </div>
+
+      <div class="filters" id="levelFilters">
+        <button class="filter-btn is-active" data-level="">All</button>
+        <button class="filter-btn" data-level="low">Low</button>
+        <button class="filter-btn" data-level="medium">Medium</button>
+        <button class="filter-btn" data-level="high">High</button>
+      </div>
+
+      <div id="historyEmpty" class="notice mt is-hidden">
+        <div class="notice__title">No predictions saved yet</div>
+        <div class="notice__body">Run a prediction on the <strong>Prediction</strong> page — it will appear here automatically.</div>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="htable" id="historyTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Stress Level</th>
+              <th>Mean RR</th>
+              <th>RMSSD</th>
+              <th>SDRR</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

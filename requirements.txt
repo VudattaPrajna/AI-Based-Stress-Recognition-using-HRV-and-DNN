@@ -1,0 +1,9 @@
+flask
+numpy
+joblib
+tensorflow
+scikit-learn
+
+# Extension features (Stress History, Dashboard, Calendar, Profile, Report)
+reportlab
+

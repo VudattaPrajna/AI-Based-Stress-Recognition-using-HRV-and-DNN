@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="page__head">
+      <div class="kicker">Monitoring system</div>
+      <h1 class="title title--sm">User <span class="shine">Profile</span></h1>
+      <p class="subtitle">A simple, session-based demo profile — no login required, built from your saved Stress History.</p>
+    </div>
+
+    <div class="glass panel">
+      <div class="row row--split">
+        <h2 class="h2" id="profileName">Demo User</h2>
+        <span class="badge">No authentication required</span>
+      </div>
+
+      <div class="profile-grid">
+        <div class="profile-row">
+          <div class="profile-row__label">Monitoring Period</div>
+          <div class="profile-row__value" id="profilePeriod">—</div>
+        </div>
+        <div class="profile-row">
+          <div class="profile-row__label">Total Measurements</div>
+          <div class="profile-row__value" id="profileTotal">0</div>
+        </div>
+        <div class="profile-row">
+          <div class="profile-row__label">Most Frequent Stress</div>
+          <div class="profile-row__value" id="profileFrequent">—</div>
+        </div>
+        <div class="profile-row">
+          <div class="profile-row__label">High Stress Episodes</div>
+          <div class="profile-row__value" id="profileHigh">0</div>
+        </div>
+      </div>
+
+      <div id="profileEmpty" class="notice mt is-hidden">
+        <div class="notice__title">No history yet</div>
+        <div class="notice__body">Your profile fills in automatically once you run a few predictions.</div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="predict-hero">
+      <div>
+        <div class="kicker">Inference playground</div>
+        <h1 class="title title--sm">Stress prediction from <span class="shine">HRV</span> inputs</h1>
+        <p class="subtitle">
+          Enter feature values in the exact training order, or auto-fill random values to test the pipeline.
+        </p>
+      </div>
+      <div class="predict-hero__right">
+        <div class="tiny muted">Model status</div>
+        <div class="row">
+          <span id="levelBadge" class="badge badge--level">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid--2">
+      <div class="glass panel panel--inputs">
+        <div class="row row--split">
+          <h2 class="h2">Inputs</h2>
+          <div class="row">
+            <button id="btnRandom" class="btn btn--ghost" type="button">Random Values</button>
+            <button id="btnPredict" class="btn btn--primary" type="button">
+              Predict Stress
+              <span class="btn__glow" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        {% if not feature_columns or feature_columns|length == 0 %}
+          <div class="notice mt">
+            <div class="notice__title">Waiting for <code>feature_columns.pkl</code></div>
+            <div class="notice__body">
+              Once you add the artifacts, this page will render your exact feature list automatically.
+            </div>
+          </div>
+        {% else %}
+          <div id="inputsGrid" class="inputs"></div>
+        {% endif %}
+      </div>
+
+      <div class="glass panel panel--output">
+        <div class="row row--split">
+          <h2 class="h2">Output</h2>
+          <a class="btn btn--ghost" href="{{ url_for('about') }}">What does this mean?</a>
+        </div>
+
+        <div class="result result--big">
+          <div class="result__label">Predicted state</div>
+          <div id="predText" class="result__value">—</div>
+          <div class="result__sub muted">
+            Labels used: <strong>Low stress</strong>, <strong>Medium level stress</strong>, <strong>High stress</strong>.
+          </div>
+        </div>
+
+        <div id="suggestionsWrap" class="suggestions is-hidden">
+          <div class="divider"></div>
+          <div class="suggestions__title">Feedback & suggestions</div>
+          <ul id="suggestionsList" class="suggestions__list"></ul>
+        </div>
+
+        <div class="mt">
+          <div class="tiny muted">Artifacts status</div>
+          <pre class="codebox" id="statusBox">Loading…</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const FEATURE_COLUMNS = {{ (feature_columns or [])|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+{% endblock %}
+

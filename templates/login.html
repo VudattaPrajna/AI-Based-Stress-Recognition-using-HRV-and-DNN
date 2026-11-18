@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign In · {{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+  </head>
+  <body class="authbg">
+    <div class="authcard">
+      <a class="authback" href="{{ url_for('landing') }}">&larr; Back</a>
+      <div class="authcard__brand">AI Based Stress Recognition Using HRV and DNN</div>
+      <h1 class="authcard__title">Welcome Back</h1>
+      <p class="authcard__subtitle">Sign in to continue to your dashboard</p>
+
+      {% if error %}
+        <div class="autherror">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="{{ url_for('login_submit') }}">
+        <input type="hidden" name="next" value="{{ next_url or '' }}" />
+
+        <div class="authfield">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" value="{{ form.email if form else '' }}" required />
+        </div>
+
+        <div class="authfield">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Your password" required />
+        </div>
+
+        <button type="submit" class="authbtn">Sign In</button>
+      </form>
+
+      <div class="authswitch">
+        Don't have an account? <a href="{{ url_for('register_page') }}">Create one</a>
+      </div>
+    </div>
+  </body>
+</html>

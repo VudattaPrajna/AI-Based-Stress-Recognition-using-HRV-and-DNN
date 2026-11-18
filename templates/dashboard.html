@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="page__head">
+      <div class="kicker">Monitoring system</div>
+      <h1 class="title title--sm">Stress <span class="shine">Dashboard</span></h1>
+      <p class="subtitle">Live snapshot of today's predictions, trend, and average HRV — built from your Stress History.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="glass stat-card">
+        <div class="stat-card__label">Current Stress</div>
+        <div id="statCurrent" class="stat-card__value">—</div>
+        <div class="stat-card__sub">Latest prediction today</div>
+      </div>
+      <div class="glass stat-card">
+        <div class="stat-card__label">Today's Predictions</div>
+        <div id="statTotal" class="stat-card__value">0</div>
+        <div id="statBreakdown" class="stat-card__sub">Low 0 · Medium 0 · High 0</div>
+      </div>
+      <div class="glass stat-card">
+        <div class="stat-card__label">Average HRV</div>
+        <div id="statAvgHrv" class="stat-card__value">—</div>
+        <div id="statAvgHrvSub" class="stat-card__sub">Calculated from today's records</div>
+      </div>
+      <div class="glass stat-card">
+        <div class="stat-card__label">Stress Trend</div>
+        <div id="statTrend" class="stat-card__value">—</div>
+        <div class="stat-card__sub">Increasing / Stable / Decreasing</div>
+      </div>
+    </div>
+
+    <div class="glass panel mt">
+      <div class="row row--split">
+        <h2 class="h2">Stress Trend (today)</h2>
+        <a class="btn btn--ghost" href="{{ url_for('history_page') }}">View full history</a>
+      </div>
+      <div class="trend-chart-wrap">
+        <canvas id="trendChart" height="110"></canvas>
+      </div>
+      <div id="trendEmpty" class="notice mt is-hidden">
+        <div class="notice__title">No predictions yet today</div>
+        <div class="notice__body">Head to <strong>Prediction</strong> and click <em>Predict Stress</em> to start building today's trend.</div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

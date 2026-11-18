@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="page">
+    <div class="page__head">
+      <div class="kicker">Monitoring system</div>
+      <h1 class="title title--sm">Prediction <span class="shine">Report</span></h1>
+      <p class="subtitle">Generate a PDF report summarizing a day's predictions, stress trend, HRV averages and recommendations.</p>
+    </div>
+
+    <div class="glass panel">
+      <h2 class="h2">Report contents</h2>
+      <ul class="list">
+        <li>Prediction summary (Low / Medium / High counts)</li>
+        <li>Stress trend chart for the selected day</li>
+        <li>HRV feature averages (MEAN_RR, RMSSD, SDRR, LF, HF, ...)</li>
+        <li>Personalized recommendations</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <div id="daySummary" class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__label">Total Predictions</div>
+          <div id="repTotal" class="stat-card__value">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Most Frequent State</div>
+          <div id="repFrequent" class="stat-card__value">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Overall Trend</div>
+          <div id="repTrend" class="stat-card__value">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Stress Score</div>
+          <div id="repScore" class="stat-card__value">—/100</div>
+        </div>
+      </div>
+      <p class="tiny muted mt">Stress Score is a project-defined monitoring score, not a medical measurement.</p>
+
+      <div class="report-actions">
+        <label class="tiny muted" for="reportDate">Date</label>
+        <input type="date" id="reportDate" />
+        <button id="btnGenerate" class="btn btn--primary" type="button">
+          Generate Report
+          <span class="btn__glow" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/report.js') }}"></script>
+{% endblock %}
